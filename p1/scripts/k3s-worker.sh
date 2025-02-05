@@ -11,7 +11,7 @@ MASTER_IP=$1
 # Get the token from the shared folder
 TOKEN=$(cat /vagrant/token)
 
-export INSTALL_K3S_EXEC="--node-ip=$MASTER_IP --flannel-iface=eth1"
+export INSTALL_K3S_EXEC="--flannel-iface=eth1"
 # Install K3s agent (worker) and join the master node
 curl -sfL https://get.k3s.io | K3S_URL=https://$MASTER_IP:6443 K3S_TOKEN=$TOKEN sh -s -
 
