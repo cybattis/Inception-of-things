@@ -1,11 +1,11 @@
 SERVER_IP = "192.168.56.110"
-SERVER_NAME = "cybattisS"
+SERVER_NAME = "njennesS"
 
 Vagrant.configure("2") do |config|
 	config.vm.box = "debian/bookworm64"
 	config.vm.provider "virtualbox" do |vb|
-		vb.memory = "1024"
-		vb.cpus = 1
+		vb.memory = "2048"
+		vb.cpus = 2
 		vb.gui = false
 	end
 
@@ -13,9 +13,12 @@ Vagrant.configure("2") do |config|
 	config.vm.define SERVER_NAME do |server|
 		server.vm.hostname = SERVER_NAME
 		server.vm.network "private_network", ip: SERVER_IP
+		server.vm.network "forwarded_port", guest: 80, host: 8080
+
 		server.vm.provider "virtualbox" do |vb|
 			vb.customize ["modifyvm", :id, "--name", SERVER_NAME]
 		end
-		server.vm.provision "shell", path: "./scripts/k3s-server.sh", args: [SERVER_IP]
+
+		server.vm.provision "shell", path: "./scripts/k3s-server.sh"
 	end
 end

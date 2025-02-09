@@ -4,7 +4,11 @@
 
 ### Vagrant
 
-### K3s
+[Vagrant](https://developer.hashicorp.com/vagrant/docs)
+
+### Kubernetes & K3s
+
+[Kubernetes](https://blog.stephane-robert.info/docs/conteneurs/orchestrateurs/kubernetes/)
 
 ### Bash
 
