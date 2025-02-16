@@ -4,7 +4,7 @@ set -euo pipefail
 echo -e "\033[1;3;34m=== Init p1 & p2 script starting... ===\033[0m"
 
 sudo apt update && apt upgrade
-sudo apt install -y git vim apt-transport-https ca-certificates curl gnupg
+sudo apt install -y git vim apt-transport-https ca-certificates gnupg
 
 # Install Vagrant
 echo -e "\033[1;3;34m=== Install Vagrant ===\033[0m"
