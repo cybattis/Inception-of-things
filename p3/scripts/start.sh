@@ -15,11 +15,15 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl wait pods --all -n argocd --for condition=Ready --timeout=300s
 kubectl port-forward svc/argocd-server -n argocd 8080:443 > /dev/null &
 
-INIT_PASSWORD=argocd admin initial-password -n argocd
+INIT_PASSWORD=$(argocd admin initial-password -n argocd)
 
-argocd login "localhost:8080" --password $INIT_PASSWORD
+argocd login localhost:8080 --username admin --password $INIT_PASSWORD
 
 argocd app create iot --repo https://github.com/NathanJennes/IOT-argocd --path app --dest-server https://kubernetes.default.svc --dest-namespace dev
 
 argocd app get iot
 argocd app sync iot
+
+argocd app set iot --sync-policy automated
+argocd app set iot --auto-prune
+argocd app set iot --self-heal
