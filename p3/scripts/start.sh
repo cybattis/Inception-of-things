@@ -19,4 +19,7 @@ INIT_PASSWORD=argocd admin initial-password -n argocd
 
 argocd login "localhost:8080" --password $INIT_PASSWORD
 
+argocd app create iot --repo https://github.com/NathanJennes/IOT-argocd --path app --dest-server https://kubernetes.default.svc --dest-namespace dev
 
+argocd app get iot
+argocd app sync iot
