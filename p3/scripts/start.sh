@@ -14,3 +14,9 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl wait pods --all -n argocd --for condition=Ready --timeout=300s
 kubectl port-forward svc/argocd-server -n argocd 8080:443 > /dev/null &
+
+INIT_PASSWORD=argocd admin initial-password -n argocd
+
+argocd login "localhost:8080" --password $INIT_PASSWORD
+
+
