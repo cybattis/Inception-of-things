@@ -26,9 +26,7 @@ echo -e "\033[1;3;34m=== Install kublect ===\033[0m"
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 # Install kubectl
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
-SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-rm $SCRIPTPATH/kubectl
+rm kubectl
 
 echo -e "\033[1;3;34m=== Install K3d ===\033[0m"
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
