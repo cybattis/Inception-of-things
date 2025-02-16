@@ -1,3 +1,4 @@
 .vagrant
 token
 kubeconfig
+p3/kubectl

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Stop the port-forwarding scripts
 pkill -f "kubectl port-forward -n argocd svc/argocd-server -n argocd 8080:443"
 

@@ -3,7 +3,7 @@ set -euo pipefail
 
 echo -e "\033[1;3;34m=== Init p3 script starting ===\033[0m"
 
-sudo apt-get install net-tools -y
+sudo apt-get install net-tools curl -y
 
 echo -e "\033[1;3;34m=== Install docker ===\033[0m"
 # Add Docker's official GPG key:
