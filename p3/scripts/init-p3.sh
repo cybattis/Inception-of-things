@@ -34,12 +34,12 @@ sudo apt -y clean && sudo apt -y autoremove && sudo apt -y autoclean
 echo -e "\033[1;3;34m=== Done ===\033[0m"
 
 echo -e "\033[1;3;34m=== Init k3d cluster... ===\033[0m"
-k3d cluster create mycluster --agents 2
+sudo k3d cluster create argocluster --agents 2
 
-kubectl create namespace argocd
-kubectl create namespace dev
+sudo kubectl create namespace argocd
+sudo kubectl create namespace dev
 
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+sudo kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 echo -e "\033[1;3;34m=== Waiting Argo CD Setup ===\033[0m"
 
