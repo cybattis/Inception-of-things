@@ -28,5 +28,3 @@ kubectl wait pods --all -n dev --for condition=Ready --timeout=300s
 argocd app set iot --sync-policy automated
 argocd app set iot --auto-prune
 argocd app set iot --self-heal
-
-kubectl port-forward svc/iot-service -n dev 8888:8888 &> /dev/null &
