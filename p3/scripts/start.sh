@@ -18,7 +18,10 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443 &> /dev/null &
 
 INIT_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 
-argocd login localhost:8080 --username admin --password "$INIT_PASSWORD"
+echo y | argocd login localhost:8080 --username admin --password "$INIT_PASSWORD"
+
+argocd account update-password --current-password "$INIT_PASSWORD" --new-password Password
+
 argocd app create iot --repo https://github.com/NathanJennes/IOT-argocd --path app --dest-server https://kubernetes.default.svc --dest-namespace dev
 
 argocd app sync iot
@@ -29,6 +32,7 @@ argocd app set iot --sync-policy automated
 argocd app set iot --auto-prune
 argocd app set iot --self-heal
 
-kubectl port-forward svc/iot-service -n dev 8888:8888 &> /dev/null &
+kubectl wait --for=condition=Ready pods --all --timeout=300s -n dev
+kubectl port-forward svc/iot-app 8888 -n dev --address="0.0.0.0" &> /dev/null &
 
 echo -e "\033[1;3;34m=== Done ===\033[0m"
