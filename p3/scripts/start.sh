@@ -26,13 +26,11 @@ argocd app create iot --repo https://github.com/NathanJennes/IOT-argocd --path a
 
 argocd app sync iot
 
-kubectl wait pods --all -n dev --for condition=Ready --timeout=300s
-
 argocd app set iot --sync-policy automated
 argocd app set iot --auto-prune
 argocd app set iot --self-heal
 
 kubectl wait --for=condition=Ready pods --all --timeout=300s -n dev
-kubectl port-forward svc/iot-app 8888 -n dev --address="0.0.0.0" &> /dev/null &
+kubectl port-forward svc/iot-app 8888 -n dev &> /dev/null &
 
 echo -e "\033[1;3;34m=== Done ===\033[0m"
